@@ -1,0 +1,15 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/d3/3.4.6/d3.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<input type="button" class="restart" value="attempt restart" />
+
+<script>
+
+var requestReset = function() {
+  $.get('/restart');
+}
+
+d3.select('.restart').on('click', requestReset)
+
+
+</script>
