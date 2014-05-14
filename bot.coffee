@@ -4,7 +4,9 @@ auth = process.env.AUTH
 bot = new PlugBotAPI(auth);
 room = 'mashupfm';
 
-
+welcomeMessages = [
+  "welcome to paradise"
+]
 songLengthLimit = 8
 songLengthLimitSeconds = songLengthLimit * 60
 enforceSongLength = true
@@ -33,6 +35,8 @@ bot.connect(room);
 
 bot.on('roomJoin', () ->
   console.log("Connected!");
+  bot.chat welcomeMessages[Math.floor(Math.random() * welcomeMessages.length)]
+
   ###
   bot.chat('i like turtles')
   bot.getUsers(function(users) {
