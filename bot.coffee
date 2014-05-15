@@ -138,7 +138,7 @@ djAdvanceHandler = (data) ->
 
 
 voteUpdateHandler = (data) ->
-    curVotes[data.id] = data.vote
+    curVotes[data.user.id] = data.vote
     numMehs = 0
     for userid,vote of curVotes
         if vote is -1
