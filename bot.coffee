@@ -1,4 +1,5 @@
-PlugBotAPI = require('plugbotapi');
+#PlugBotAPI = require('plugbotapi');
+PlugBotAPI = require('./botapi.js');
 _ = require('lodash')
 auth = process.env.AUTH
 bot = new PlugBotAPI(auth);
