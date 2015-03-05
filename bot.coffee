@@ -1,8 +1,10 @@
-#PlugBotAPI = require('plugbotapi');
-PlugBotAPI = require('./botapi.js');
+PlugBotAPI = require('plugbotapi');
 _ = require('lodash')
-auth = process.env.AUTH
-bot = new PlugBotAPI(auth);
+creds = {
+    email: process.env.EMAIL,
+    password: process.env.PASSWORD
+}
+bot = new PlugBotAPI(creds);
 room = 'mashupfm';
 
 welcomeMessages = [
@@ -18,7 +20,7 @@ autoSkipTimeout = null
 currentDJName = null
 currentDJ = null
 enableAutoSkip = false
-botadmins = ['5164d7883b79036fc28a56a9']
+botadmins = ['3655973']
 roomStaff = []
 cycleLimits = [5,10]
 cycleLimits = [1,2]
@@ -59,26 +61,31 @@ updateStaff = () ->
 initEvents = () ->
 #// A few sample events
   bot.on('chat', chatHandler);
-  bot.on('djAdvance', djAdvanceHandler);
+  bot.on('advance', djAdvanceHandler);
   bot.on('voteUpdate', voteUpdateHandler);
   bot.on('userJoin', userJoinHandler)
 
 
 
 chatHandler = (data) ->
-    console.log data
+    # doing either of these crashes the bot if special chars?/
+    #console.log data
+    #process.stdout.write(JSON.stringify(data))
     lowercase = data.message.toLowerCase()
-    lastUserChats[data.fromID] = Date.now()
-    fromBotAdmin = isBotAdmin(data.fromID)
-    fromStaff = isRoomStaff(data.fromID)
+    lastUserChats[data.uid] = Date.now()
+    fromBotAdmin = isBotAdmin(data.uid)
+    fromStaff = isRoomStaff(data.uid)
     if (lowercase.indexOf('bot') isnt -1 or lowercase.indexOf('alfred') isnt -1) and lowercase.indexOf('dance') isnt -1
         bot.woot()
     limitCmd = lowercase.match('(bot|alfred) limit ([0-9]+|off)')
     if limitCmd isnt null
         console.log limitCmd
         param = limitCmd[2]
+        if param is '0'
+            param = 'off'
         if param is 'off'
             enforceSongLength = false
+            bot.chat 'The time limit is off.'
         else
             enforceSongLength = true
             songLengthLimit = param 
@@ -91,11 +98,13 @@ chatHandler = (data) ->
         bot.chat 'I\'m calmer than you are.'
     if lowercase.match('(bot|alfred) skip') and fromStaff
         userSkip()
-    if (data.type == 'emote')
-        console.log(data.from+data.message)
-    else
-        console.log(data.from+"> "+data.message)
 
+    ###
+    if (data.type == 'emote')
+        console.log(data.un+data.message)
+    else
+        console.log(data.un+"> "+data.message)
+    ###
 djAdvanceHandler = (data) ->
     console.log data
     curVotes = {}
