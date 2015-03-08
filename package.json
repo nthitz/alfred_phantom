@@ -6,7 +6,8 @@
   "dependencies": {
     "express": "~4.2.0",
     "lodash": "~2.4.1",
-    "plugbotapi": "^0.1.6"
+    "plugbotapi": "^0.1.6",
+    "phantom": "^0.7.2"
   },
   "devDependencies": {},
   "scripts": {
