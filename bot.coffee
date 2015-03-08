@@ -99,6 +99,10 @@ chatHandler = (data) ->
     if lowercase.match('(bot|alfred) skip') and fromStaff
         userSkip()
 
+    if lowercase.match('(bot|alfred) autoskip') and fromStaff
+        enableAutoSkip = !enableAutoSkip
+        bot.chat 'ok, starting next song, autoskip is ' + if enableAutoSkip then 'on' else 'off'
+
     ###
     if (data.type == 'emote')
         console.log(data.un+data.message)
