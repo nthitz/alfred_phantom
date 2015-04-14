@@ -26,7 +26,7 @@ cycleLimits = [5,10]
 cycleLimits = [1,2]
 enforceAFKAtHowManyDJs = 8
 #enforceAFKAtHowManyDJs = 0
-afkLimit = 90 * 60 * 1000
+afkLimit = 180 * 60 * 1000
 #afkLimit = 1000
 
 mehLimit = 5
