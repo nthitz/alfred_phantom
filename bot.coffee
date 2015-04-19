@@ -178,7 +178,7 @@ checkIfCurDJStillAFK = (dj, timeLimit) ->
     lastChat = lastUserChats[dj.id]
     if lastChat is -1
         bot.chat "@"+dj.username + " please stay active to dj"
-        bot.moderateRemoveDJ(currentDJ.id)
+        bot.moderateRemoveDJ("" + currentDJ.id)
 checkIfOnDeckAFK = (dj, timeLimit) ->
     if typeof lastUserChats[dj.id] is 'undefined'
         return
