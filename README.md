@@ -1,3 +1,7 @@
+RIP plug.dj
+===========
+
+
 alfred_phantom
 ==============
 Install PhantomJS 2.0 and have it somewhere in your `$PATH`
